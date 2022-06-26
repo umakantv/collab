@@ -1,0 +1,4 @@
+environment/*.env
+!environment/default.env
+
+node_modules

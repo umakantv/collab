@@ -1,0 +1,16 @@
+{
+  "name": "collab",
+  "version": "1.0.0",
+  "description": "This is a node-mongo-express app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "umakantv",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  }
+}
