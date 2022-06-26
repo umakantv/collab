@@ -12,6 +12,7 @@ dotenv.config({
 const config = {
     PORT: process.env.PORT,
     DATABASE_URI: process.env.DATABASE_URI,
+    JWT_SECRET: process.env.JWT_SECRET,
 }
 
 module.exports = config;
