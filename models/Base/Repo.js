@@ -4,6 +4,7 @@ const AppError = require('../../utils/AppError');
 class BaseRepo {
 
     constructor(ModelName, ModelSchema) {
+        this.ModelName = ModelName;
         this.Model = mongoose.model(ModelName, ModelSchema);
     }
     
@@ -11,7 +12,7 @@ class BaseRepo {
         const entity = await this.Model.findOne(options);
 
         if (!entity) {
-            throw new AppError('Entity does not exist.', 404)
+            throw new AppError(`${this.ModelName} does not exist.`, 404)
         } else {
             return entity;
         }
@@ -26,7 +27,7 @@ class BaseRepo {
         let entity = await this.Model.findOne(entity);
 
         if (entity) {
-            throw new AppError('Model already exists with given email.', 400)
+            throw new AppError(`${this.ModelName} already exists.`, 400)
         } else {
             entity = new this.Model(entity);
             await entity.save();
@@ -45,15 +46,11 @@ class BaseRepo {
         return entity;
     }
 
-    async deleteById(entity) {
-        let entity = await this.Model.findOne(entity);
+    async deleteById(id) {
+        let entity = await this.Model.findByIdAndDelete(id);
 
-        if (entity) {
-            throw new AppError('Model already exists with given email.', 400)
-        } else {
-            entity = new this.Model(entity);
-            await entity.save();
-            return entity;
+        if (!entity) {
+            throw new AppError(`${this.ModelName} does not exist.`, 400)
         }
     }
 }
