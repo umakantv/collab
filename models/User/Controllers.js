@@ -3,13 +3,13 @@ const UserService = require('./Service')
 
 class UserControllers {
     
-    static async findById(req) {
+    async findById(req) {
 
         const { id } = req.params;
         return UserService.findById(id);
     }
 
-    static async getLoggedInUser(req) {
+    async getLoggedInUser(req) {
 
         if (req.user) {
             return UserService.findById(req.user._id);
@@ -18,13 +18,13 @@ class UserControllers {
         }
     }
 
-    static async registerUser(req) {
+    async registerUser(req) {
 
         let { name, email, password } = req.body;
         return UserService.registerUser({name, email, password});
     }
 
-    static async updateProfile(req) {
+    async updateProfile(req) {
         
         const { name } = req.body;
         const { id } = req.params;
@@ -32,17 +32,17 @@ class UserControllers {
     }
 
 
-    static async login(req) {
+    async login(req) {
 
         const { email, password } = req.body;
         return UserService.login({email, password});
     }
 
-    static async findByName(req) {
+    async findByName(req) {
         
         const { name } = req.params;
         return UserService.findByName(name);
     }
 }
 
-module.exports = UserControllers;
+module.exports = new UserControllers();

@@ -4,6 +4,7 @@ const express = require('express');
 const getConnection = require('./database');
 const userRouter = require('./routes/user');
 const auth = require('./middlewares/auth');
+const initiateRoutes = require('./routes');
 
 const app = express();
 
@@ -11,7 +12,7 @@ app.use(express.json());
 
 app.use(auth);
 
-app.use(userRouter);
+initiateRoutes(app);
 
 async function serve() {
     await getConnection().catch(err => {
