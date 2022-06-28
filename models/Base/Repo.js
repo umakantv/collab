@@ -23,13 +23,13 @@ class BaseRepo {
         return entities;
     }
 
-    async create(entity) {
-        let entity = await this.Model.findOne(entity);
+    async create(data) {
+        let entity = await this.Model.findOne(data);
 
         if (entity) {
             throw new AppError(`${this.ModelName} already exists.`, 400)
         } else {
-            entity = new this.Model(entity);
+            entity = new this.Model(data);
             await entity.save();
             return entity;
         }
