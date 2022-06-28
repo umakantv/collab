@@ -22,13 +22,6 @@ class BaseRepo {
         return entities;
     }
 
-
-    async find(options, selectFields) {
-        const entities = await this.Model.find(options);
-
-        return entities;
-    }
-
     async create(entity) {
         let entity = await this.Model.findOne(entity);
 
