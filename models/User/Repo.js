@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AppError = require('../../utils/AppError');
 
 const UserSchema = new mongoose.Schema({
     email: String,
@@ -14,7 +15,7 @@ class UserRepo {
         const user = await User.findOne(options).select(selectFields || '-password');
 
         if (!user) {
-            throw new Error('User does not exist with the given id.')
+            throw new AppError('User does not exist with the given id.', 404)
         } else {
             return user;
         }
@@ -40,7 +41,7 @@ class UserRepo {
         }).select('-password');
 
         if (user) {
-            throw new Error('User already exists with given email.')
+            throw new AppError('User already exists with given email.', 400)
         } else {
             user = new User({
                 name, email, password
