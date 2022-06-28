@@ -37,8 +37,12 @@ class BaseRepo {
 
     async updateEntityById(id, entityUpdateFields) {
         let entity = await this.Model.findById(id);
+
+        if (!entity) {
+            throw new AppError(`${this.ModelName} does not exist.`, 404)
+        }
         
-        for (const [key, value] of entityUpdateFields) {
+        for (const [key, value] of Object.entries(entityUpdateFields)) {
             entity[key] = value;
         }
 
@@ -50,7 +54,7 @@ class BaseRepo {
         let entity = await this.Model.findByIdAndDelete(id);
 
         if (!entity) {
-            throw new AppError(`${this.ModelName} does not exist.`, 400)
+            throw new AppError(`${this.ModelName} does not exist.`, 404)
         }
     }
 }
