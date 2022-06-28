@@ -6,6 +6,8 @@ const BlogSchema = new mongoose.Schema({
     authorId: mongoose.Types.ObjectId,
     title: String,
     content: String,
+    categories: mongoose.Types.Array,
+    tags: mongoose.Types.Array,
 }, { timestamps: true });
 
 class BlogRepo extends BaseRepo {
