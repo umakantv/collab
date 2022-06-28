@@ -17,7 +17,7 @@ class BaseService {
     }
 
     async findMany(options) {
-        return this.repo.findOne(options)
+        return this.repo.findMany(options)
     }
     
     async createUnique(options) {
