@@ -1,8 +1,8 @@
 function baseHandler(controller) {
-    return async (req, res) => {
+    return async (req, res, next) => {
         try {
 
-            const response = await controller(req, res);
+            const response = await controller(req, res, next);
             return res.send({
                 result: 'SUCCESS',
                 data: response
@@ -10,7 +10,7 @@ function baseHandler(controller) {
 
         } catch(err) {
 
-            return res.send({
+            return res.status(err.code || 500).send({
                 result: 'ERROR',
                 error: err.message,
                 data: null

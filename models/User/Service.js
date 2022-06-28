@@ -39,7 +39,7 @@ class UserService {
                 user
             }
         } else {
-            throw new Error('Invalid Credentials.');
+            throw new Error('Invalid Credentials.', 400);
         }
     }
 

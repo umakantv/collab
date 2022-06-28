@@ -1,3 +1,4 @@
+const AppError = require('../../utils/AppError');
 const UserService = require('./Service')
 
 class UserControllers {
@@ -13,7 +14,7 @@ class UserControllers {
         if (req.user) {
             return UserService.findById(req.user._id);
         } else {
-            throw new Error('Login first.')
+            throw new AppError('Login first.', 400)
         }
     }
 
