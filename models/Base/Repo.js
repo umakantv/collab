@@ -35,8 +35,8 @@ class BaseRepo {
         }
     }
 
-    async updateEntityById(entityUpdateFields) {
-        let entity = await this.Model.findOne(entityUpdateField);
+    async updateEntityById(id, entityUpdateFields) {
+        let entity = await this.Model.findById(id);
         
         for (const [key, value] of entityUpdateFields) {
             entity[key] = value;

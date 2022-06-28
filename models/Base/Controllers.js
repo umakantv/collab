@@ -22,7 +22,8 @@ class BaseController {
     }
 
     async put(req, res) {
-        return this.service.updateEntityById(req.body);
+        const { id } = req.params;
+        return this.service.updateEntityById(id, req.body);
     }
 
     async delete(req, res) {
