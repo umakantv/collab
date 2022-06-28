@@ -1,4 +1,4 @@
-const AppError = require('../../utils/AppError');
+// const AppError = require('../../utils/AppError');
 
 class BaseService {
     
@@ -24,8 +24,8 @@ class BaseService {
         return this.repo.create(options);
     }
 
-    async updateById(id, entity) {
-        return this.repo.updateEntityById(id, entity);
+    async updateById(id, entityUpdateFields) {
+        return this.repo.updateEntityById(id, entityUpdateFields);
     }
 
     async deleteById(id) {
