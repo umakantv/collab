@@ -21,6 +21,10 @@ class BaseService {
     }
     
     async createUnique(options) {
+        return this.repo.createUnique(options);
+    }
+
+    async create(options) {
         return this.repo.create(options);
     }
 

@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
 const BaseRepo = require('../Base/Repo');
-// const AppError = require('../../utils/AppError');
 
 const BlogSchema = new mongoose.Schema({
-    authorId: mongoose.Types.ObjectId,
+    authorId: String,
     title: String,
     content: String,
-    categories: mongoose.Types.Array,
-    tags: mongoose.Types.Array,
+    categories: [{type: String}],
+    tags: [{type: String}],
 }, { timestamps: true });
 
 class BlogRepo extends BaseRepo {
