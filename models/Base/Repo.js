@@ -23,7 +23,7 @@ class BaseRepo {
         return entities;
     }
 
-    async create(data) {
+    async createUnique(data) {
         let entity = await this.Model.findOne(data);
 
         if (entity) {
@@ -33,6 +33,12 @@ class BaseRepo {
             await entity.save();
             return entity;
         }
+    }
+
+    async create(data) {
+        let entity = new this.Model(data);
+        await entity.save();
+        return entity;
     }
 
     async updateEntityById(id, entityUpdateFields) {
@@ -56,6 +62,8 @@ class BaseRepo {
         if (!entity) {
             throw new AppError(`${this.ModelName} does not exist.`, 404)
         }
+
+        return entity;
     }
 }
 
