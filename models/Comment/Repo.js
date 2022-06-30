@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const BaseRepo = require('../Base/Repo');
-// const AppError = require('../../utils/AppError');
 
 const CommentSchema = new mongoose.Schema({
-    userId: mongoose.Types.ObjectId,
-    blogId: mongoose.Types.ObjectId,
-    commentId: mongoose.Types.ObjectId,
+    userId: String,
+    blogId: String,
+    commentId: String,
     text: String,
 }, { timestamps: true });
 
