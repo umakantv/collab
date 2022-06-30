@@ -1,12 +1,9 @@
 const AppError = require('../../utils/AppError');
 const BaseControllers = require('../Base/Controllers');
-const Service = require('./Service')
+const Service = require('./Service');
+const validators = require('./Validators');
 
 class Controller extends BaseControllers {
-
-    constructor(service) {
-        super(service);
-    }
 
     async findBlogByIdAndUserId(req, blogId) {
 
@@ -23,21 +20,23 @@ class Controller extends BaseControllers {
    
     async post(req) {
 
-        this.authenticate(req);
-        
-        const { user } = req;
         const blog = req.body;
-        blog.authorId = user.id;
+        this.validators.validateCreate(blog);
 
+        this.authenticate(req);
+
+        const { user } = req;
+        blog.authorId = user.id;
         return this.service.create(blog);
     }
 
     async put(req, res) {
         
+        const blogUpdateFields = req.body;
+        this.validators.validateUpdate(blogUpdateFields);
+
         const { id: blogId } = req.params;
         const blog = await this.findBlogByIdAndUserId(req, blogId);
-
-        const blogUpdateFields = req.body;
         
         return this.service.updateById(blogId, blogUpdateFields, blog);
     }
@@ -45,10 +44,10 @@ class Controller extends BaseControllers {
     async delete(req) {
 
         const { id: blogId } = req.params;
-        const blog = await this.findBlogByIdAndUserId(req, blogId);
+        await this.findBlogByIdAndUserId(req, blogId);
 
         return this.service.deleteById(blogId);
     }
 }
 
-module.exports = new Controller(Service)
+module.exports = new Controller(Service, validators)

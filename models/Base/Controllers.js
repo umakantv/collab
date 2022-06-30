@@ -2,8 +2,9 @@ const AppError = require('../../utils/AppError');
 
 class BaseController {
     
-    constructor(service) {
+    constructor(service, validators) {
         this.service = service;
+        this.validators = validators;
     }
 
     authenticate(req) {

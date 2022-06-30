@@ -1,19 +1,20 @@
 const AppError = require('../../utils/AppError');
 const BaseController = require('../Base/Controllers');
-const UserService = require('./Service')
+const userService = require('./Service');
+const validators = require('./Validators');
 
 class UserControllers extends BaseController {
     
     async findById(req) {
 
         const { id } = req.params;
-        return UserService.findById(id);
+        return this.service.findById(id);
     }
 
     async getLoggedInUser(req) {
 
         if (req.user) {
-            return UserService.findById(req.user._id);
+            return this.service.findById(req.user._id);
         } else {
             throw new AppError('Login first.', 400)
         }
@@ -21,29 +22,35 @@ class UserControllers extends BaseController {
 
     async registerUser(req) {
 
-        let { name, email, password } = req.body;
-        return UserService.registerUser({name, email, password});
+        const payload = req.body;
+
+        this.validators.validateRegister(payload);
+
+        return this.service.registerUser(payload);
     }
 
     async updateProfile(req) {
         
         const { name } = req.body;
         const { id } = req.params;
-        return UserService.updateProfile({ id, name });
+        return this.service.updateProfile({ id, name });
     }
 
 
     async login(req) {
+        
+        const payload = req.body;
+        
+        this.validators.validateLogin(payload);
 
-        const { email, password } = req.body;
-        return UserService.login({email, password});
+        return this.service.login(payload);
     }
 
     async findByName(req) {
         
         const { name } = req.params;
-        return UserService.findByName(name);
+        return this.service.findByName(name);
     }
 }
 
-module.exports = new UserControllers();
+module.exports = new UserControllers(userService, validators);

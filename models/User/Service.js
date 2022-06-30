@@ -1,35 +1,36 @@
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const UserRepo = require('./Repo')
-const Config = require('./../../config')
+const repo = require('./Repo')
+const Config = require('./../../config');
+const BaseService = require('../Base/Service');
 
-class UserService {
+class UserService extends BaseService {
     
-    static async findById(id) {
+    async findById(id) {
         
-        const user = await UserRepo.findOne({
+        const user = await this.repo.findOne({
             _id: id
         });
 
         return user;
     }
 
-    static async registerUser(user) {
+    async registerUser(user) {
         
         let { name, email, password } = user;
         password = await bcryptjs.hash(password, 10);
-        return UserRepo.create({name, email, password});
+        return this.repo.create({name, email, password});
     }
 
-    static async updateProfile({id, name}) {
+    async updateProfile({id, name}) {
 
-        return UserRepo.update({ id, name });
+        return this.repo.update({ id, name });
     }
 
 
-    static async login({ email, password }) {
+    async login({ email, password }) {
 
-        const user = await UserRepo.findOne({email}, 'id email password');
+        const user = await this.repo.findOne({email}, 'id email password');
 
         const match = await bcryptjs.compare(password, user.password);
 
@@ -43,9 +44,9 @@ class UserService {
         }
     }
 
-    static async findByName(name) {
+    async findByName(name) {
         
-        const users = await UserRepo.findMany({
+        const users = await this.repo.findMany({
             name: {
                 $regex: name, $options: "i"
             }
@@ -55,4 +56,4 @@ class UserService {
     }
 }
 
-module.exports = UserService;
+module.exports = new UserService(repo);
