@@ -41,8 +41,8 @@ class BaseRepo {
         return entity;
     }
 
-    async updateEntityById(id, entityUpdateFields) {
-        let entity = await this.Model.findById(id);
+    async updateEntityById(id, entityUpdateFields, entity) {
+        entity = entity || await this.Model.findById(id);
 
         if (!entity) {
             throw new AppError(`${this.ModelName} does not exist.`, 404)

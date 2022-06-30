@@ -10,7 +10,7 @@ class Router extends BaseRouter {
 const router = new Router(Controllers);
 
 router.registerRoute('get', '/blogs', 'getAll');
-router.registerRoute('get', '/blogs/:id', 'get');
+router.registerRoute('get', '/blog/:id', 'get');
 router.registerRoute('post', '/blog', 'post');
 router.registerRoute('put', '/blog/:id', 'put');
 router.registerRoute('delete', '/blog/:id', 'delete');

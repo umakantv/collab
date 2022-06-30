@@ -28,8 +28,8 @@ class BaseService {
         return this.repo.create(options);
     }
 
-    async updateById(id, entityUpdateFields) {
-        return this.repo.updateEntityById(id, entityUpdateFields);
+    async updateById(id, entityUpdateFields, entity) {
+        return this.repo.updateEntityById(id, entityUpdateFields, entity);
     }
 
     async deleteById(id) {

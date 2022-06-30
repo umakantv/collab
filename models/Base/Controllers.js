@@ -6,6 +6,15 @@ class BaseController {
         this.service = service;
     }
 
+    authenticate(req) {
+
+        const { user } = req;
+
+        if (!user) {
+            throw new AppError('You are not logged in. Please login first to create a blog post.', 401);
+        }
+    }
+
     async get(req, res) {
         const { id } = req.params;
         return this.service.findOne({

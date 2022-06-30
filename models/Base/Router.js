@@ -12,6 +12,10 @@ class BaseRouter {
         this.Router = express.Router();
     }
 
+    use(...handlers) {
+        this.Router.use(...handlers);
+    }
+
     registerRoute(httpMethod, path, controllerMethod, ...middlewares) {
         this.Router[httpMethod](path, ...middlewares, this.baseHandler(controllerMethod));
     }

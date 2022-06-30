@@ -8,15 +8,6 @@ class Controller extends BaseControllers {
         super(service);
     }
 
-    authenticate(req) {
-
-        const { user } = req;
-
-        if (!user) {
-            throw new AppError('You are not logged in. Please login first to create a blog post.', 401);
-        }
-    }
-
     async findBlogByIdAndUserId(req, blogId) {
 
         this.authenticate(req);
@@ -44,12 +35,11 @@ class Controller extends BaseControllers {
     async put(req, res) {
         
         const { id: blogId } = req.params;
-        await this.findBlogByIdAndUserId(req, blogId);
+        const blog = await this.findBlogByIdAndUserId(req, blogId);
 
-        const blog = req.body;
-        delete blog.authorId;
+        const blogUpdateFields = req.body;
         
-        return this.service.updateById(blogId, req.body);
+        return this.service.updateById(blogId, blogUpdateFields, blog);
     }
 
     async delete(req) {
@@ -57,7 +47,7 @@ class Controller extends BaseControllers {
         const { id: blogId } = req.params;
         const blog = await this.findBlogByIdAndUserId(req, blogId);
 
-        return this.service.deleteById(blog);
+        return this.service.deleteById(blogId);
     }
 }
 
