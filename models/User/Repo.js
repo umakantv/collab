@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const AppError = require('../../utils/AppError');
+const BaseRepo = require('../Base/Repo');
 
 const UserSchema = new mongoose.Schema({
     email: String,
@@ -7,12 +8,12 @@ const UserSchema = new mongoose.Schema({
     password: String,
 });
 
-const User = mongoose.model('User', UserSchema);
+const ModelName = 'User';
 
-class UserRepo {
+class UserRepo extends BaseRepo {
     
-    static async findOne(options, selectFields) {
-        const user = await User.findOne(options).select(selectFields || '-password');
+    async findOne(options, selectFields) {
+        const user = await this.Model.findOne(options).select(selectFields || '-password');
 
         if (!user) {
             throw new AppError('User does not exist with the given id.', 404)
@@ -22,28 +23,28 @@ class UserRepo {
         
     }
 
-    static async findMany(options, selectFields) {
-        const users = await User.find(options).select(selectFields || '-password');
+    async findMany(options, selectFields) {
+        const users = await this.Model.find(options).select(selectFields || '-password');
 
         return users;
     }
 
 
-    static async find(options, selectFields) {
-        const users = await User.find(options).select(selectFields || '-password');
+    async find(options, selectFields) {
+        const users = await this.Model.find(options).select(selectFields || '-password');
 
         return users;
     }
 
-    static async create({email, name, password}) {
-        let user = await User.findOne({
+    async create({email, name, password}) {
+        let user = await this.Model.findOne({
             email
         }).select('-password');
 
         if (user) {
             throw new AppError('User already exists with given email.', 400)
         } else {
-            user = new User({
+            user = new this.Model({
                 name, email, password
             });
 
@@ -53,7 +54,7 @@ class UserRepo {
         }   
     }
 
-    static async update({ id, name }) {
+    async update({ id, name }) {
         let user = await this.findOne({
             _id: id
         });
@@ -65,4 +66,4 @@ class UserRepo {
     }
 }
 
-module.exports = UserRepo;
+module.exports = new UserRepo(ModelName, UserSchema);
