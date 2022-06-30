@@ -1,7 +1,8 @@
 const AppError = require('../../utils/AppError');
+const BaseController = require('../Base/Controllers');
 const UserService = require('./Service')
 
-class UserControllers {
+class UserControllers extends BaseController {
     
     async findById(req) {
 

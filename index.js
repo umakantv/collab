@@ -2,9 +2,8 @@ const config = require('./config');
 
 const express = require('express');
 const getConnection = require('./database');
-const userRouter = require('./routes/user');
 const auth = require('./middlewares/auth');
-const initiateRoutes = require('./routes');
+const initiateRoutes = require('./router');
 
 const app = express();
 
