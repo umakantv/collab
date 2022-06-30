@@ -4,10 +4,6 @@ const Service = require('./Service')
 
 class Controller extends BaseControllers {
 
-    constructor(service) {
-        super(service);
-    }
-
     async findBlogByIdAndUserId(req, blogId) {
 
         this.authenticate(req);
