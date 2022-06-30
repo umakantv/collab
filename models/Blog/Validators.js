@@ -1,5 +1,5 @@
-//* validators/post.validator.js
 const Joi = require('joi');
+const BaseValidator = require('../Base/Validators');
 
 const createPostSchema = Joi.object({
     title: Joi.string().min(5).required(),
