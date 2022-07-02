@@ -3,7 +3,8 @@ const BaseValidator = require('../Base/Validators');
 
 const createCommentSchema = Joi.object({
     text: Joi.string().min(1).required(),
-    blogId: Joi.string().min(1).required()
+    blogId: Joi.string().min(1).required(),
+    commentId: Joi.string().min(1),
 });
 
 const updateCommentSchema = Joi.object({
