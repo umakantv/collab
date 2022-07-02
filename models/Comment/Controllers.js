@@ -1,15 +1,18 @@
 const AppError = require('../../utils/AppError');
 const BaseControllers = require('../Base/Controllers');
-const Service = require('./Service')
+const Service = require('./Service');
+const Validators = require('./Validators');
 
 class Controller extends BaseControllers {
     
     async post(req, res) {
-        
         this.authenticate(req);
-
+        
         const { user } = req;
         const comment = req.body;
+
+        this.validators.validateCreate(comment);
+
         comment.userId = user.id;
 
         return this.service.create(req.body);
@@ -34,6 +37,8 @@ class Controller extends BaseControllers {
         const comment = await this.findCommentByIdAndUserId(req, id)
         const { text } = req.body;
 
+        this.validators.validateUpdate({ text });
+
         return this.service.updateById(id, { text }, comment);
     }
 
@@ -46,4 +51,4 @@ class Controller extends BaseControllers {
     }
 }
 
-module.exports = new Controller(Service)
+module.exports = new Controller(Service, Validators)

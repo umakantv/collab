@@ -9,10 +9,10 @@ const createPostSchema = Joi.object({
 });
 
 const updatePostSchema = Joi.object({
-    title: Joi.string().min(5).required(),
-    content: Joi.string().min(1).required(),
-    tags: Joi.array().items(Joi.string()).min(2).max(4).required(),
-    categories: Joi.array().items(Joi.string()).min(2).max(4).required()
+    title: Joi.string().min(5),
+    content: Joi.string().min(1),
+    tags: Joi.array().items(Joi.string()).min(2).max(4),
+    categories: Joi.array().items(Joi.string()).min(2).max(4)
 });
 
 class Validator extends BaseValidator {
