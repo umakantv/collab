@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const AppError = require('../../utils/AppError');
+const cuid = require('cuid');
 
 class BaseRepo {
 
@@ -23,12 +24,13 @@ class BaseRepo {
         return entities;
     }
 
-    async createUnique(data) {
-        let entity = await this.Model.findOne(data);
+    async createUnique(data, findOneOptions) {
+        let entity = await this.Model.findOne(findOneOptions || data);
 
         if (entity) {
             throw new AppError(`${this.ModelName} already exists.`, 400)
         } else {
+            // data._id = cuid();
             entity = new this.Model(data);
             await entity.save();
             return entity;
@@ -36,13 +38,14 @@ class BaseRepo {
     }
 
     async create(data) {
+        // data._id = cuid();
         let entity = new this.Model(data);
         await entity.save();
         return entity;
     }
 
     async updateEntityById(id, entityUpdateFields, entity) {
-        entity = entity || await this.Model.findById(id);
+        entity = entity || await this.Model.findOne({ _id: id });
 
         if (!entity) {
             throw new AppError(`${this.ModelName} does not exist.`, 404)
@@ -57,7 +60,7 @@ class BaseRepo {
     }
 
     async deleteById(id) {
-        let entity = await this.Model.findByIdAndDelete(id);
+        let entity = await this.Model.findOneAndDelete({ _id: id });
 
         if (!entity) {
             throw new AppError(`${this.ModelName} does not exist.`, 404)

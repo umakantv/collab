@@ -7,17 +7,15 @@ class BaseService {
     }
 
     async findByIdorFail(id) {
-        return this.repo.findOne({
-            _id: id
-        })
+        return this.repo.findOne({ _id: id });
     }
 
     async findOne(options) {
-        return this.repo.findOne(options)
+        return this.repo.findOne(options);
     }
 
     async findMany(options) {
-        return this.repo.findMany(options)
+        return this.repo.findMany(options);
     }
     
     async createUnique(options) {

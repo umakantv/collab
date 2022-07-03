@@ -4,7 +4,11 @@ A RESTful API server using node-express-mongodb.
 
 ## TODO:
 
-### Blogs:
+### User
+- Count of Blogs Posts
+### Blog Posts:
+- Count of Comments
+- Pagination
 - Add likes
 
 ### Comments

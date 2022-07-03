@@ -13,9 +13,7 @@ class Controller extends BaseControllers {
 
         this.validators.validateCreate(comment);
 
-        comment.userId = user.id;
-
-        return this.service.create(req.body);
+        return this.service.create(comment, user);
     }
 
     async findCommentByIdAndUserId(req, id) {

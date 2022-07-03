@@ -1,16 +1,22 @@
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const repo = require('./Repo')
+const blogService = require('./../Blog/Service');
+const commentService = require('./../Comment/Service');
 const Config = require('./../../config');
 const BaseService = require('../Base/Service');
 
 class UserService extends BaseService {
+
+    constructor(repo, blogService, commentService) {
+        super(repo);
+        this.blogService = blogService;
+        this.commentService = commentService;
+    }
     
-    async findById(id) {
+    async getUserProfile(id) {
         
-        const user = await this.repo.findOne({
-            _id: id
-        });
+        const user = await this.repo.getchUserProfile(id);
 
         return user;
     }
@@ -18,7 +24,9 @@ class UserService extends BaseService {
     async registerUser(user) {
         
         let { name, email, password } = user;
+
         password = await bcryptjs.hash(password, 10);
+
         return this.repo.create({name, email, password});
     }
 
@@ -54,6 +62,18 @@ class UserService extends BaseService {
 
         return users;
     }
+
+    async getUsersWithDecreasingNumberOfComments() {
+        return this.commentService.getUsersWithDecreasingNumberOfComments();
+    }
+
+    async getUsersWithDecreasingNumberOfBlogs() {
+        return this.blogService.getUsersWithDecreasingNumberOfBlogs();
+    }
+
+    async getBlogsAndUsersWithDecreasingNumberOfComments() {
+        return this.commentService.getBlogsAndUsersWithDecreasingNumberOfComments();
+    }
 }
 
-module.exports = new UserService(repo);
+module.exports = new UserService(repo, blogService, commentService);

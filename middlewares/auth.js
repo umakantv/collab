@@ -14,7 +14,7 @@ async function auth(req, res, next) {
 
             let user = jwt.decode(token);
             if (user.iat > moment().subtract(5, 'days').unix()) {
-                user = await UserService.findById(user.id);
+                user = await UserService.findByIdorFail(user.id);
                 req.user = user;
             }
 
