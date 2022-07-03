@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const AppError = require('../../utils/AppError');
 const BaseRepo = require('../Base/Repo');
+const cuid = require('cuid');
 
 const UserSchema = new mongoose.Schema({
+    _id: String,
     email: String,
     name: String,
     password: String,
@@ -45,13 +47,14 @@ class UserRepo extends BaseRepo {
             throw new AppError('User already exists with given email.', 400)
         } else {
             user = new this.Model({
+                _id: cuid(),
                 name, email, password
             });
 
             await user.save();
 
             return user;
-        }   
+        }
     }
 
     async update({ id, name }) {

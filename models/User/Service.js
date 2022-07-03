@@ -18,7 +18,9 @@ class UserService extends BaseService {
     async registerUser(user) {
         
         let { name, email, password } = user;
+
         password = await bcryptjs.hash(password, 10);
+
         return this.repo.create({name, email, password});
     }
 

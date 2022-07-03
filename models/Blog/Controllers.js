@@ -11,7 +11,7 @@ class Controller extends BaseControllers {
         const { user } = req;
         const blog = await this.service.findByIdorFail(blogId);
 
-        if (blog.authorId.toString() !== user._id.toString()) {
+        if (blog.authorId !== user._id) {
             throw new AppError('Unauthorized action.', 401);
         }
 
@@ -20,9 +20,7 @@ class Controller extends BaseControllers {
 
     async get(req, res) {
         const { id } = req.params;
-        return this.service.findOne({
-            _id: id
-        });
+        return this.service.findByIdorFail(id);
     }
    
     async post(req) {
@@ -33,8 +31,7 @@ class Controller extends BaseControllers {
         this.authenticate(req);
 
         const { user } = req;
-        blog.authorId = user._id;
-        return this.service.create(blog);
+        return this.service.create(blog, user);
     }
 
     async put(req, res) {

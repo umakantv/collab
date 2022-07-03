@@ -1,8 +1,10 @@
+const cuid = require('cuid');
 const mongoose = require('mongoose');
 const BaseRepo = require('../Base/Repo');
 
 const BlogSchema = new mongoose.Schema({
-    authorId: mongoose.Types.ObjectId,
+    _id: String,
+    authorId: String,
     title: String,
     content: String,
     categories: [{type: String}],
@@ -15,21 +17,11 @@ class BlogRepo extends BaseRepo {
         super(ModelName, ModelSchema);
     }
 
-    async findOne(options) {
-        const entity = await this.Model.findOne(options);
-
-        if (!entity) {
-            throw new AppError(`${this.ModelName} does not exist.`, 404)
-        } else {
-            return entity;
-        }
+    async create(data) {
+        data._id = cuid();
+        let entity = new this.Model(data);
+        return entity.save();
     }
-
-    async findMany(options) {
-        const entities = await this.Model.find(options);
-        return entities;
-    }
-
 }
 
 module.exports = new BlogRepo('Blog', BlogSchema);

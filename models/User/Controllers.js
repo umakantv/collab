@@ -4,6 +4,10 @@ const userService = require('./Service');
 const validators = require('./Validators');
 
 class UserControllers extends BaseController {
+
+    constructor(userService, validators) {
+        super(userService, validators)
+    }
     
     async findById(req) {
 
