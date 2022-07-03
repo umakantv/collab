@@ -9,10 +9,10 @@ class UserControllers extends BaseController {
         super(userService, validators)
     }
     
-    async findById(req) {
+    async getProfile(req) {
 
         const { id } = req.params;
-        return this.service.findById(id);
+        return this.service.getUserProfile(id);
     }
 
     async getLoggedInUser(req) {
@@ -54,6 +54,14 @@ class UserControllers extends BaseController {
         
         const { name } = req.params;
         return this.service.findByName(name);
+    }
+
+    async getUsersWithDecreasingNumberOfComments() {
+        return this.service.getUsersWithDecreasingNumberOfComments();
+    }
+
+    async getUsersWithDecreasingNumberOfBlogs() {
+        return this.service.getUsersWithDecreasingNumberOfBlogs();
     }
 }
 

@@ -6,11 +6,9 @@ const BaseService = require('../Base/Service');
 
 class UserService extends BaseService {
     
-    async findById(id) {
+    async getUserProfile(id) {
         
-        const user = await this.repo.findOne({
-            _id: id
-        });
+        const user = await this.repo.getchUserProfile(id);
 
         return user;
     }
@@ -55,6 +53,14 @@ class UserService extends BaseService {
         });
 
         return users;
+    }
+
+    async getUsersWithDecreasingNumberOfComments() {
+        return this.repo.fetchUsersWithDecreasingNumberOfComments();
+    }
+
+    async getUsersWithDecreasingNumberOfBlogs() {
+        return this.repo.fetchUsersWithDecreasingNumberOfBlogs();
     }
 }
 

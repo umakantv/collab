@@ -25,6 +25,70 @@ class UserRepo extends BaseRepo {
         
     }
 
+    async fetchUserProfile(id) {
+        return this.Model.findById(id)
+    }
+
+    async fetchUsersWithDecreasingNumberOfComments() {
+        const data = await this.Model.aggregate([
+            {
+                $lookup: {
+                    from: "comments",
+                    localField: "_id",
+                    foreignField: "userId",
+                    as: "comments"
+                }
+            },
+            {
+                $addFields: {
+                    "commentsCount": { $size: "$comments"}
+                }
+            },
+            {
+                $sort: {
+                    "commentsCount": -1
+                }
+            }
+        ])
+
+        data.forEach(item => {
+            delete item.comments;
+            delete item.password;
+        });
+
+        return data;
+    }
+
+    async fetchUsersWithDecreasingNumberOfBlogs() {
+        const data = await this.Model.aggregate([
+            {
+                $lookup: {
+                    from: "blogs",
+                    localField: "_id",
+                    foreignField: "authorId",
+                    as: "blogs"
+                }
+            },
+            {
+                $addFields: {
+                    "blogsCount": { $size: "$blogs"}
+                }
+            },
+            {
+                $sort: {
+                    "blogsCount": -1
+                }
+            }
+        ])
+
+        data.forEach(item => {
+            delete item.blogs;
+            delete item.password;
+        });
+
+        return data;
+    }
+
     async findMany(options, selectFields) {
         const users = await this.Model.find(options).select(selectFields || '-password');
 

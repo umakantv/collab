@@ -11,7 +11,9 @@ const router = new Router(Controllers);
 
 router.registerRoute('get', '/user/search/:name', 'findByName');
 router.registerRoute('get', '/user/me', 'getLoggedInUser');
-router.registerRoute('get', '/user/:id', 'findById');
+router.registerRoute('get', '/user/:id', 'getProfile');
+router.registerRoute('get', '/users/sortByCommentsCountDecreasing', 'getUsersWithDecreasingNumberOfComments');
+router.registerRoute('get', '/users/sortByBlogsCountDecreasing', 'getUsersWithDecreasingNumberOfBlogs');
 
 router.registerRoute('post', '/user/register', 'registerUser');
 router.registerRoute('post', '/user/login', 'login');
