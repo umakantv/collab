@@ -22,6 +22,42 @@ class CommentRepo extends BaseRepo {
         return entity.save();
     }
 
+    async fetchUsersWithDecreasingNumberOfComments() {
+        const data = await this.Model.aggregate([
+            {
+                $group: {
+                    _id: "$userId",
+                    count: { $count: { } }
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $unwind: {
+                    path: "$user",
+                    preserveNullAndEmptyArrays: false
+                }
+            },
+            {
+                $sort: {
+                    "count": -1
+                }
+            }
+        ])
+
+        data.forEach(item => {
+            delete item.user.password;
+        });
+
+        return data;
+    }
+
 }
 
 module.exports = new CommentRepo('Comment', CommentSchema);

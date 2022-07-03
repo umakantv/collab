@@ -22,6 +22,43 @@ class BlogRepo extends BaseRepo {
         let entity = new this.Model(data);
         return entity.save();
     }
+
+    async fetchUsersWithDecreasingNumberOfBlogs() {
+        const data = await this.Model.aggregate([
+            {
+                $group: {
+                    _id: "$authorId",
+                    count: { $count: { } }
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $unwind: {
+                    path: "$user",
+                    preserveNullAndEmptyArrays: false
+                }
+            },
+            {
+                $sort: {
+                    "count": -1
+                }
+            }
+        ])
+
+        data.forEach(item => {
+            delete item.user.password;
+        });
+
+        return data;
+    }
+
 }
 
 module.exports = new BlogRepo('Blog', BlogSchema);

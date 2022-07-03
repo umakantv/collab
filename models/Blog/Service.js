@@ -13,6 +13,10 @@ class Service extends BaseService {
         return this.repo.create(blog);
     }
 
+    async getUsersWithDecreasingNumberOfBlogs() {
+        return this.repo.fetchUsersWithDecreasingNumberOfBlogs();
+    }
+
 }
 
 module.exports = new Service(Repo)

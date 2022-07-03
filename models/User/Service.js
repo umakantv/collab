@@ -1,10 +1,18 @@
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const repo = require('./Repo')
+const blogService = require('./../Blog/Service');
+const commentService = require('./../Comment/Service');
 const Config = require('./../../config');
 const BaseService = require('../Base/Service');
 
 class UserService extends BaseService {
+
+    constructor(repo, blogService, commentService) {
+        super(repo);
+        this.blogService = blogService;
+        this.commentService = commentService;
+    }
     
     async getUserProfile(id) {
         
@@ -56,12 +64,12 @@ class UserService extends BaseService {
     }
 
     async getUsersWithDecreasingNumberOfComments() {
-        return this.repo.fetchUsersWithDecreasingNumberOfComments();
+        return this.commentService.getUsersWithDecreasingNumberOfComments();
     }
 
     async getUsersWithDecreasingNumberOfBlogs() {
-        return this.repo.fetchUsersWithDecreasingNumberOfBlogs();
+        return this.blogService.getUsersWithDecreasingNumberOfBlogs();
     }
 }
 
-module.exports = new UserService(repo);
+module.exports = new UserService(repo, blogService, commentService);
