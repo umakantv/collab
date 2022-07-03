@@ -26,7 +26,7 @@ class UserRepo extends BaseRepo {
     }
 
     async fetchUserProfile(id) {
-        return this.Model.findById(id)
+        return this.Model.findById(id).select('-password');
     }
 
     async findMany(options, selectFields) {

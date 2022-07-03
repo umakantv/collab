@@ -18,7 +18,7 @@ class UserControllers extends BaseController {
     async getLoggedInUser(req) {
 
         if (req.user) {
-            return this.service.findById(req.user._id);
+            return this.service.getUserProfile(req.user._id);
         } else {
             throw new AppError('Login first.', 400)
         }
@@ -66,6 +66,11 @@ class UserControllers extends BaseController {
 
     async getBlogsAndUsersWithDecreasingNumberOfComments() {
         return this.service.getBlogsAndUsersWithDecreasingNumberOfComments();
+    }
+
+    async oauthRedirect(req, res) {
+        
+        console.log(req.body);
     }
 }
 
