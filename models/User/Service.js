@@ -70,6 +70,10 @@ class UserService extends BaseService {
     async getUsersWithDecreasingNumberOfBlogs() {
         return this.blogService.getUsersWithDecreasingNumberOfBlogs();
     }
+
+    async getBlogsAndUsersWithDecreasingNumberOfComments() {
+        return this.commentService.getBlogsAndUsersWithDecreasingNumberOfComments();
+    }
 }
 
 module.exports = new UserService(repo, blogService, commentService);

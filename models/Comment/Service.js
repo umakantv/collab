@@ -20,6 +20,10 @@ class CategoryService extends BaseService {
     async getUsersWithDecreasingNumberOfComments() {
         return this.repo.fetchUsersWithDecreasingNumberOfComments();
     }
+
+    async getBlogsAndUsersWithDecreasingNumberOfComments() {
+        return this.repo.fetchBlogsAndUsersWithDecreasingNumberOfComments();
+    }
 }
 
 module.exports = new CategoryService(CommentRepo, BlogService);

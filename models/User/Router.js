@@ -14,6 +14,7 @@ router.registerRoute('get', '/user/me', 'getLoggedInUser');
 router.registerRoute('get', '/user/:id', 'getProfile');
 router.registerRoute('get', '/users/sortByCommentsCountDecreasing', 'getUsersWithDecreasingNumberOfComments');
 router.registerRoute('get', '/users/sortByBlogsCountDecreasing', 'getUsersWithDecreasingNumberOfBlogs');
+router.registerRoute('get', '/users/blogAndUsersByCommentCountDecreasing', 'getBlogsAndUsersWithDecreasingNumberOfComments');
 
 router.registerRoute('post', '/user/register', 'registerUser');
 router.registerRoute('post', '/user/login', 'login');

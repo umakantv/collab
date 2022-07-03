@@ -63,6 +63,10 @@ class UserControllers extends BaseController {
     async getUsersWithDecreasingNumberOfBlogs() {
         return this.service.getUsersWithDecreasingNumberOfBlogs();
     }
+
+    async getBlogsAndUsersWithDecreasingNumberOfComments() {
+        return this.service.getBlogsAndUsersWithDecreasingNumberOfComments();
+    }
 }
 
 module.exports = new UserControllers(userService, validators);
