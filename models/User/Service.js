@@ -16,7 +16,7 @@ class UserService extends BaseService {
     
     async getUserProfile(id) {
         
-        const user = await this.repo.getchUserProfile(id);
+        const user = await this.repo.fetchUserProfile(id);
 
         return user;
     }
