@@ -9,13 +9,17 @@
 			"name": "User",
 			"item": [
 				{
+					"name": "OAuth",
+					"item": []
+				},
+				{
 					"name": "Register User",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Umakant\",\n    \"email\": \"umakantvashishtha98\",\n    \"password\": \"umakant\"\n}",
+							"raw": "{\n    \"name\": \"Umakant\",\n    \"email\": \"umakantvashishtha96@gmail.com\",\n    \"password\": \"umakant\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,44 +98,13 @@
 					]
 				},
 				{
-					"name": "Search User",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"umakant\",\n    \"password\": \"umakant\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/user/search/Umakant",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"user",
-								"search",
-								"Umakant"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Login User",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"umakantvashishtha\",\n    \"password\": \"umakant\"\n}",
+							"raw": "{\n    \"email\": \"umakantvashishtha96@gmail.com\",\n    \"password\": \"umakant\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,6 +141,194 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Search Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"umakant\",\n    \"password\": \"umakant\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/search/Umakant",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"search",
+								"Umakant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/{{test_user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"{{test_user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Users - Sort By Comments Count Decreasing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/sortByCommentsCountDecreasing",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"sortByCommentsCountDecreasing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Users - Sort By Blogs Count Decreasing Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/sortByBlogsCountDecreasing",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"sortByBlogsCountDecreasing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Users and Blogs - Sort By Comments Count Decreasing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/blogAndUsersByCommentCountDecreasing",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"blogAndUsersByCommentCountDecreasing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Umakant Vashishtha\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/{{test_user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"{{test_user_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update User",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Umakant Vashishtha\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/{{test_user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"{{test_user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-hFzY7GvvdcWtL55+dQDqCh0a3bw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 26 Jun 2022 19:29:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"result\": \"SUCCESS\",\n    \"data\": {\n        \"_id\": \"62b8b256dc3530a86dde0330\",\n        \"email\": \"umakant\",\n        \"name\": \"Umakant Vashishtha\",\n        \"password\": \"umakant\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -198,7 +359,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Computer Science\"\n}",
+							"raw": "{\n    \"name\": \"Games\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -291,7 +452,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"binary-search\"\n}",
+							"raw": "{\n    \"name\": \"printing\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -317,7 +478,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Computer Science\"\n}",
+							"raw": "{\n    \"name\": \"printing\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -358,39 +519,51 @@
 			]
 		},
 		{
-			"name": "Update User",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"Umakant Vashishtha\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{base_url}}/user/{{test_user_id}}",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"user",
-						"{{test_user_id}}"
-					]
-				}
-			},
-			"response": [
+			"name": "Blog",
+			"item": [
 				{
-					"name": "Update User",
-					"originalRequest": {
-						"method": "PATCH",
+					"name": "Fetch All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blogs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog/{{test_blog_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"{{test_blog_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Umakant Vashishtha\"\n}",
+							"raw": "{\n    \"title\": \"Binary Search - Part IV\",\n    \"content\": \"Time complexity - O(log n).\",\n    \"categories\": [\"Computer Science\", \"Technology\"],\n    \"tags\": [\"problem-solving\", \"code\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -398,47 +571,137 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/user/{{test_user_id}}",
+							"raw": "{{base_url}}/blog",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"user",
-								"{{test_user_id}}"
+								"blog"
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
+					"response": []
+				},
+				{
+					"name": "Update By ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Binary Search - Part IV\",\n    \"content\": \"Binary Search is a divide-and-conquer algorithm to find an element in any sorted array.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "137"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"89-hFzY7GvvdcWtL55+dQDqCh0a3bw\""
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 26 Jun 2022 19:29:45 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
+						"url": {
+							"raw": "{{base_url}}/blog/{{test_blog_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"{{test_blog_id}}"
+							]
 						}
-					],
-					"cookie": [],
-					"body": "{\n    \"result\": \"SUCCESS\",\n    \"data\": {\n        \"_id\": \"62b8b256dc3530a86dde0330\",\n        \"email\": \"umakant\",\n        \"name\": \"Umakant Vashishtha\",\n        \"password\": \"umakant\",\n        \"__v\": 0\n    }\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/blog/{{test_blog_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"blog",
+								"{{test_blog_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"This has really helped me.\",\n    \"blogId\": \"{{test_blog_id}}\",\n    \"commentId\": \"{{test_comment_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/comment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update By ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Binary Search is awesome!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/comment/{{test_comment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comment",
+								"{{test_comment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/comment/{{test_comment_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"comment",
+								"{{test_comment_id}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -498,6 +761,22 @@
 		{
 			"key": "test_tag_id",
 			"value": "62bb6a1b965d3e30819ff8d8"
+		},
+		{
+			"key": "test_blog_id",
+			"value": "62bc90411f13a241e12abd63"
+		},
+		{
+			"key": "test_comment_id",
+			"value": "62bc90411f13a241e12abd63"
+		},
+		{
+			"key": "oauth_client_id",
+			"value": ""
+		},
+		{
+			"key": "oauth_client_secret",
+			"value": ""
 		}
 	]
 }
