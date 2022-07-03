@@ -13,6 +13,9 @@ const config = {
     PORT: process.env.PORT,
     DATABASE_URI: process.env.DATABASE_URI,
     JWT_SECRET: process.env.JWT_SECRET,
+    
+    GOOGLE_OAUTH_CLIENT_ID: process.env.GOOGLE_OAUTH_CLIENT_ID,
+    GOOGLE_OAUTH_CLIENT_SECRET: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
 }
 
 module.exports = config;

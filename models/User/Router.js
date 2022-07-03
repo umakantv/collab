@@ -9,6 +9,7 @@ class Router extends BaseRouter {
 
 const router = new Router(Controllers);
 
+router.registerRoute('all', '/user/oauth/redirect', 'oauthRedirect');
 router.registerRoute('get', '/user/search/:name', 'findByName');
 router.registerRoute('get', '/user/me', 'getLoggedInUser');
 router.registerRoute('get', '/user/:id', 'getProfile');
